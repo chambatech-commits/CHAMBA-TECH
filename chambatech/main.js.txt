@@ -1,0 +1,4 @@
+console.log("¡JavaScript está funcionando!");
+
+// Este código agrega un mensaje de alerta cuando cargas la página.
+alert("¡Hola! ¡Gracias por visitar CHAMBA TECH!");

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouses | CHAMBA TECH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #1a1a1a;
+            --medium-dark-bg: #2c2c2c;
+            --light-text: #f1f1f1;
+            --accent-color: #ffb700;
+            --button-hover: #e0a300;
+            --header-bg: #121212;
+            --card-bg: #212121;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--accent-color);
+        }
+        header {
+            background-color: var(--header-bg);
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-right: 20px;
+        }
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .nav-links li {
+            margin-right: 25px;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+        }
+        .nav-actions button {
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-actions button:hover {
+            background-color: var(--button-hover);
+        }
+        .user-name {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+        .category-header {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin: 40px 0 20px;
+            color: var(--accent-color);
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-info {
+            padding: 20px;
+        }
+        .product-info h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+        .product-info p {
+            margin: 10px 0;
+            color: #ccc;
+        }
+        .product-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--light-text);
+        }
+        .add-to-cart-btn {
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .add-to-cart-btn:hover {
+            background-color: var(--button-hover);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <a href="chamba-tech" class="logo">CHAMBA TECH</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="chamba-tech">Inicio</a></li>
+                    <li><a href="categories.html">Categorías</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                {% if user %}
+                    <span class="user-name">Hola, {{ user }}</span>
+                    <a href="{{ url_for('logout') }}"><button>Cerrar Sesión</button></a>
+                {% else %}
+                    <a href="login.html"><button>Iniciar Sesión / Registrarse</button></a>
+                {% endif %}
+                <a href="cart.html"><button>Carrito ({{ session.cart|length if session.cart else 0 }})</button></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="category-header">Mouses</h1>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x200?text=Mouse+Gaming+Pro" alt="Mouse Gaming Pro">
+                <div class="product-info">
+                    <h3>Mouse Gaming Pro</h3>
+                    <p class="product-price">$250.000</p>
+                    <a href="{{ url_for('add_to_cart', product_id='mouse-gaming-pro') }}"><button class="add-to-cart-btn">Añadir al carrito</button></a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x200?text=Mouse+Ergonomico" alt="Mouse Ergonómico">
+                <div class="product-info">
+                    <h3>Mouse Ergonómico</h3>
+                    <p class="product-price">$180.000</p>
+                    <a href="{{ url_for('add_to_cart', product_id='mouse-ergonomico') }}"><button class="add-to-cart-btn">Añadir al carrito</button></a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/250x200?text=Mouse+Inalambrico" alt="Mouse Inalámbrico">
+                <div class="product-info">
+                    <h3>Mouse Inalámbrico</h3>
+                    <p class="product-price">$120.000</p>
+                    <a href="{{ url_for('add_to_cart', product_id='mouse-inalambrico') }}"><button class="add-to-cart-btn">Añadir al carrito</button></a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
